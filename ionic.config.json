@@ -1,0 +1,7 @@
+{
+  "name": "prim_lek_mvc_BIG",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
