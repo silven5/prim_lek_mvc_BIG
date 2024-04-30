@@ -1,0 +1,62 @@
+<ion-card>
+  <ion-card-header
+    ><ion-card-title
+      >Введіть нового користувача</ion-card-title
+    ></ion-card-header
+  >
+  <ion-card-content>
+    <form [formGroup]="userForm" (ngSubmit)="add(userForm.value)">
+      <ion-input
+        label="Ім'я"
+        labelPlacement="floating"
+        type="text"
+        name="name"
+        formControlName="name"
+      /><ion-input
+        type="number"
+        min="0"
+        label="Вік"
+        labelPlacement="floating"
+        name="age"
+        formControlName="age"
+      /><ion-button type="submit" [disabled]="!userForm.valid"
+        >Submit</ion-button
+      >
+    </form>
+  </ion-card-content>
+</ion-card>
+<ion-card>
+  <ion-list>
+    <ion-item *ngFor="let user of users">
+      <ion-label>
+        <input
+          type="checkbox"
+          (change)="toggle(user)"
+          [checked]="user.complete"
+        />
+      </ion-label>
+      <ion-label>
+        Ім'я:
+        <s *ngIf="user.complete; else uncompleteName">{{ user.name }}</s>
+        <ng-template #uncompleteName>{{ user.name }}</ng-template>
+        <ion-label>
+          Вік:
+          <span
+            #age
+            contenteditable="true"
+            class="editable"
+            (focusout)="edit(user, age)"
+          >
+            <s *ngIf="user.complete; else uncompleteAge">{{ user.age }}</s>
+            <ng-template #uncompleteAge>{{ user.age }}</ng-template></span
+          >
+        </ion-label>
+      </ion-label>
+      <ion-label>
+        <ion-button fill="clear" class="delete" (click)="delete(user)">
+          <ion-icon name="trash-outline"></ion-icon>Delete</ion-button
+        >
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-card>
